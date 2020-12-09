@@ -1,0 +1,567 @@
+from tkinter import *
+root = Tk()
+root.title("Sudoku Solver")
+
+def solveItPressed():
+    # Collect user input
+
+    def insertable(x, y, n):
+        x = int(x)
+        y = int(y)
+
+        # Check row for n
+        if n in board[y]:
+            return False
+
+        # Check column for n
+        for boards in board:
+            if boards[x] == n:
+                return False
+        counter = 1
+        if y == 0 or y == 1 or y == 2:
+            ySub = 0
+        if y == 3 or y == 4 or y == 5:
+            ySub = 3
+        if y == 6 or y == 7 or y == 8:
+            ySub = 6
+        if x == 0 or x == 1 or x == 2:
+            xSub = 0
+        if x == 3 or x == 4 or x == 5:
+            xSub = 3
+        if x == 6 or x == 7 or x == 8:
+            xSub = 6
+        xxSub = xSub
+
+        # Check block for n
+        while counter < 4:
+            if board[ySub][xSub] == n:
+                return False
+            xSub += 1
+            if board[ySub][xSub] == n:
+                return False
+            xSub += 1
+            if board[ySub][xSub] == n:
+                return False
+            ySub += 1
+            xSub = xxSub
+            counter += 1
+        print(f"TRUE{y}{x}{n}")
+        return True
+
+
+    def solver():
+        for y in range(9):
+            for x in range(9):
+                if board[y][x] == 0:
+                    for n in range(1,10):
+                        if insertable(x, y, n):
+                            board[y][x] = n
+                            print(board)
+                            solver()
+                            board[y][x] = 0
+                    return
+        print('Solved')
+        return
+
+    x = 0
+    y = 0
+    rwOne = [sq11.get(), sq12.get(), sq13.get(),
+             sq14.get(), sq15.get(), sq16.get(),
+             sq17.get(), sq18.get(), sq19.get()]
+    rwTwo = [sq21.get(), sq22.get(), sq23.get(),
+             sq24.get(), sq25.get(), sq26.get(),
+             sq27.get(), sq28.get(), sq29.get()]
+    rwThree = [sq31.get(), sq32.get(), sq33.get(),
+               sq34.get(), sq35.get(), sq36.get(),
+               sq37.get(), sq38.get(), sq39.get()]
+    rwFour = [sq41.get(), sq42.get(), sq43.get(),
+              sq44.get(), sq45.get(), sq46.get(),
+              sq47.get(), sq48.get(), sq49.get()]
+    rwFive = [sq51.get(), sq52.get(), sq53.get(),
+              sq54.get(), sq55.get(), sq56.get(),
+              sq57.get(), sq58.get(), sq59.get()]
+    rwSix = [sq61.get(), sq62.get(), sq63.get(),
+             sq64.get(), sq65.get(), sq66.get(),
+             sq67.get(), sq68.get(), sq69.get()]
+    rwSeven = [sq71.get(), sq72.get(), sq73.get(),
+               sq74.get(), sq75.get(), sq76.get(),
+               sq77.get(), sq78.get(), sq79.get()]
+    rwEight = [sq81.get(), sq82.get(), sq83.get(),
+               sq84.get(), sq85.get(), sq86.get(),
+               sq87.get(), sq88.get(), sq89.get()]
+    rwNine = [sq91.get(), sq92.get(), sq93.get(),
+              sq94.get(), sq95.get(), sq96.get(),
+              sq97.get(), sq98.get(), sq99.get()]
+
+    board = [rwOne, rwTwo, rwThree, rwFour, rwFive, rwSix, rwSeven, rwEight, rwNine]
+    for boards in board:
+        for num in boards:
+            if num == '':
+                board[x][y] = 0
+            else:
+                try:
+                    board[x][y] = int(num)
+                    messageBox.delete(0, END)
+                    messageBox.insert(0, "Solving....")
+                except:
+                    messageBox.delete(0, END)
+                    messageBox.insert(0, "This puzzle is not solvable")
+                    return
+                if board[x][y] > 9 or board[x][y] < 0:
+                    messageBox.delete(0, END)
+                    messageBox.insert(0, "This puzzle is not solvable")
+                    return
+            y += 1
+        y = 0
+        x += 1
+    sq11.delete(0, END)
+    sq12.delete(0, END)
+    sq13.delete(0, END)
+    sq14.delete(0, END)
+    sq15.delete(0, END)
+    sq16.delete(0, END)
+    sq17.delete(0, END)
+    sq18.delete(0, END)
+    sq19.delete(0, END)
+
+    sq21.delete(0, END)
+    sq22.delete(0, END)
+    sq23.delete(0, END)
+    sq24.delete(0, END)
+    sq25.delete(0, END)
+    sq26.delete(0, END)
+    sq27.delete(0, END)
+    sq28.delete(0, END)
+    sq29.delete(0, END)
+
+    sq31.delete(0, END)
+    sq32.delete(0, END)
+    sq33.delete(0, END)
+    sq34.delete(0, END)
+    sq35.delete(0, END)
+    sq36.delete(0, END)
+    sq37.delete(0, END)
+    sq38.delete(0, END)
+    sq39.delete(0, END)
+
+    sq41.delete(0, END)
+    sq42.delete(0, END)
+    sq43.delete(0, END)
+    sq44.delete(0, END)
+    sq45.delete(0, END)
+    sq46.delete(0, END)
+    sq47.delete(0, END)
+    sq48.delete(0, END)
+    sq49.delete(0, END)
+
+    sq51.delete(0, END)
+    sq52.delete(0, END)
+    sq53.delete(0, END)
+    sq54.delete(0, END)
+    sq55.delete(0, END)
+    sq56.delete(0, END)
+    sq57.delete(0, END)
+    sq58.delete(0, END)
+    sq59.delete(0, END)
+
+    sq61.delete(0, END)
+    sq62.delete(0, END)
+    sq63.delete(0, END)
+    sq64.delete(0, END)
+    sq65.delete(0, END)
+    sq66.delete(0, END)
+    sq67.delete(0, END)
+    sq68.delete(0, END)
+    sq69.delete(0, END)
+
+    sq71.delete(0, END)
+    sq72.delete(0, END)
+    sq73.delete(0, END)
+    sq74.delete(0, END)
+    sq75.delete(0, END)
+    sq76.delete(0, END)
+    sq77.delete(0, END)
+    sq78.delete(0, END)
+    sq79.delete(0, END)
+
+    sq81.delete(0, END)
+    sq82.delete(0, END)
+    sq83.delete(0, END)
+    sq84.delete(0, END)
+    sq85.delete(0, END)
+    sq86.delete(0, END)
+    sq87.delete(0, END)
+    sq88.delete(0, END)
+    sq89.delete(0, END)
+
+    sq91.delete(0, END)
+    sq92.delete(0, END)
+    sq93.delete(0, END)
+    sq94.delete(0, END)
+    sq95.delete(0, END)
+    sq96.delete(0, END)
+    sq97.delete(0, END)
+    sq98.delete(0, END)
+    sq99.delete(0, END)
+    solver()
+
+    sq11.insert(0, board[0][0])
+    sq12.insert(0, board[0][1])
+    sq13.insert(0, board[0][2])
+    sq14.insert(0, board[0][3])
+    sq15.insert(0, board[0][4])
+    sq16.insert(0, board[0][5])
+    sq17.insert(0, board[0][6])
+    sq18.insert(0, board[0][7])
+    sq19.insert(0, board[0][8])
+
+    sq21.insert(0, board[1][0])
+    sq22.insert(0, board[1][1])
+    sq23.insert(0, board[1][2])
+    sq24.insert(0, board[1][3])
+    sq25.insert(0, board[1][4])
+    sq26.insert(0, board[1][5])
+    sq27.insert(0, board[1][6])
+    sq28.insert(0, board[1][7])
+    sq29.insert(0, board[1][8])
+
+    sq31.insert(0, board[2][0])
+    sq32.insert(0, board[2][1])
+    sq33.insert(0, board[2][2])
+    sq34.insert(0, board[2][3])
+    sq35.insert(0, board[2][4])
+    sq36.insert(0, board[2][5])
+    sq37.insert(0, board[2][6])
+    sq38.insert(0, board[2][7])
+    sq39.insert(0, board[2][8])
+
+    sq41.insert(0, board[3][0])
+    sq42.insert(0, board[3][1])
+    sq43.insert(0, board[3][2])
+    sq44.insert(0, board[3][3])
+    sq45.insert(0, board[3][4])
+    sq46.insert(0, board[3][5])
+    sq47.insert(0, board[3][6])
+    sq48.insert(0, board[3][7])
+    sq49.insert(0, board[3][8])
+
+    sq51.insert(0, board[4][0])
+    sq52.insert(0, board[4][1])
+    sq53.insert(0, board[4][2])
+    sq54.insert(0, board[4][3])
+    sq55.insert(0, board[4][4])
+    sq56.insert(0, board[4][5])
+    sq57.insert(0, board[4][6])
+    sq58.insert(0, board[4][7])
+    sq59.insert(0, board[4][8])
+
+    sq61.insert(0, board[5][0])
+    sq62.insert(0, board[5][1])
+    sq63.insert(0, board[5][2])
+    sq64.insert(0, board[5][3])
+    sq65.insert(0, board[5][4])
+    sq66.insert(0, board[5][5])
+    sq67.insert(0, board[5][6])
+    sq68.insert(0, board[5][7])
+    sq69.insert(0, board[5][8])
+
+    sq71.insert(0, board[6][0])
+    sq72.insert(0, board[6][1])
+    sq73.insert(0, board[6][2])
+    sq74.insert(0, board[6][3])
+    sq75.insert(0, board[6][4])
+    sq76.insert(0, board[6][5])
+    sq77.insert(0, board[6][6])
+    sq78.insert(0, board[6][7])
+    sq79.insert(0, board[6][8])
+
+    sq81.insert(0, board[7][0])
+    sq82.insert(0, board[7][1])
+    sq83.insert(0, board[7][2])
+    sq84.insert(0, board[7][3])
+    sq85.insert(0, board[7][4])
+    sq86.insert(0, board[7][5])
+    sq87.insert(0, board[7][6])
+    sq88.insert(0, board[7][7])
+    sq89.insert(0, board[7][8])
+
+    sq91.insert(0, board[8][0])
+    sq92.insert(0, board[8][1])
+    sq93.insert(0, board[8][2])
+    sq94.insert(0, board[8][3])
+    sq95.insert(0, board[8][4])
+    sq96.insert(0, board[8][5])
+    sq97.insert(0, board[8][6])
+    sq98.insert(0, board[8][7])
+    sq99.insert(0, board[8][8])
+    return
+
+widVar = 2
+fontVar = "helvetica 16 bold"
+rw = 0
+
+blockOneColor = "#ABDEE6"
+blockTwoColor = "#B6CFB6"
+blockThreeColor = "#8FCACA"
+blockFourColor = "#97C1A9"
+blockFiveColor = "#55CBCD"
+blockSixColor = "#C6DBDA"
+blockSevenColor = "#CCE2CB"
+blockEightColor = "#D4F0F0"
+blockNineColor = "#A2E1DB"
+
+
+messageBox = Entry(root, width=40, justify="center")
+messageBox.insert(0, "Fill in squares and press 'solve'")
+
+# Define Blocks
+# Block One
+
+sq11 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq12 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq13 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq21 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq22 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq23 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq31 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq32 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+sq33 = Entry(root, width=widVar, bg=blockOneColor, justify="center", font=fontVar)
+
+# Block Two
+
+sq14 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq15 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq16 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq24 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq25 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq26 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq34 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq35 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+sq36 = Entry(root, width=widVar, bg=blockTwoColor, justify="center", font=fontVar)
+
+# Block Three
+
+sq17 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq18 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq19 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq27 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq28 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq29 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq37 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq38 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+sq39 = Entry(root, width=widVar, bg=blockThreeColor, justify="center", font=fontVar)
+
+# Block Four
+
+sq41 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq42 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq43 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq51 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq52 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq53 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq61 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq62 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+sq63 = Entry(root, width=widVar, bg=blockFourColor, justify="center", font=fontVar)
+
+# Block Five
+
+sq44 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq45 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq46 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq54 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq55 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq56 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq64 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq65 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+sq66 = Entry(root, width=widVar, bg=blockFiveColor, justify="center", font=fontVar)
+
+# Block Six
+
+sq47 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq48 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq49 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq57 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq58 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq59 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq67 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq68 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+sq69 = Entry(root, width=widVar, bg=blockSixColor, justify="center", font=fontVar)
+
+# Block Seven
+
+sq71 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq72 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq73 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq81 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq82 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq83 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq91 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq92 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+sq93 = Entry(root, width=widVar, bg=blockSevenColor, justify="center", font=fontVar)
+
+# Block Eight
+
+sq74 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq75 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq76 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq84 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq85 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq86 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq94 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq95 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+sq96 = Entry(root, width=widVar, bg=blockEightColor, justify="center", font=fontVar)
+
+# Block Nine
+
+sq77 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq78 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq79 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq87 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq88 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq89 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq97 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq98 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+sq99 = Entry(root, width=widVar, bg=blockNineColor, justify="center", font=fontVar)
+
+# Solve Button
+
+solveIt = Button(root, text="SOLVE", command=solveItPressed)
+
+# Display Message Box
+rw += 1
+
+messageBox.grid(row=rw, columnspan=9)
+
+# Display Blocks
+# Row One
+rw += 1
+
+sq11.grid(row=rw, column=0)
+sq12.grid(row=rw, column=1)
+sq13.grid(row=rw, column=2)
+sq14.grid(row=rw, column=3)
+sq15.grid(row=rw, column=4)
+sq16.grid(row=rw, column=5)
+sq17.grid(row=rw, column=6)
+sq18.grid(row=rw, column=7)
+sq19.grid(row=rw, column=8)
+
+# Row Two
+
+rw += 1
+
+sq21.grid(row=rw, column=0)
+sq22.grid(row=rw, column=1)
+sq23.grid(row=rw, column=2)
+sq24.grid(row=rw, column=3)
+sq25.grid(row=rw, column=4)
+sq26.grid(row=rw, column=5)
+sq27.grid(row=rw, column=6)
+sq28.grid(row=rw, column=7)
+sq29.grid(row=rw, column=8)
+
+# Row Three
+
+rw += 1
+
+sq31.grid(row=rw, column=0)
+sq32.grid(row=rw, column=1)
+sq33.grid(row=rw, column=2)
+sq34.grid(row=rw, column=3)
+sq35.grid(row=rw, column=4)
+sq36.grid(row=rw, column=5)
+sq37.grid(row=rw, column=6)
+sq38.grid(row=rw, column=7)
+sq39.grid(row=rw, column=8)
+
+# Row Four
+
+rw += 1
+
+sq41.grid(row=rw, column=0)
+sq42.grid(row=rw, column=1)
+sq43.grid(row=rw, column=2)
+sq44.grid(row=rw, column=3)
+sq45.grid(row=rw, column=4)
+sq46.grid(row=rw, column=5)
+sq47.grid(row=rw, column=6)
+sq48.grid(row=rw, column=7)
+sq49.grid(row=rw, column=8)
+
+# Row Five
+
+rw += 1
+
+sq51.grid(row=rw, column=0)
+sq52.grid(row=rw, column=1)
+sq53.grid(row=rw, column=2)
+sq54.grid(row=rw, column=3)
+sq55.grid(row=rw, column=4)
+sq56.grid(row=rw, column=5)
+sq57.grid(row=rw, column=6)
+sq58.grid(row=rw, column=7)
+sq59.grid(row=rw, column=8)
+
+# Row Six
+
+rw += 1
+
+sq61.grid(row=rw, column=0)
+sq62.grid(row=rw, column=1)
+sq63.grid(row=rw, column=2)
+sq64.grid(row=rw, column=3)
+sq65.grid(row=rw, column=4)
+sq66.grid(row=rw, column=5)
+sq67.grid(row=rw, column=6)
+sq68.grid(row=rw, column=7)
+sq69.grid(row=rw, column=8)
+
+# Row Seven
+
+rw += 1
+
+sq71.grid(row=rw, column=0)
+sq72.grid(row=rw, column=1)
+sq73.grid(row=rw, column=2)
+sq74.grid(row=rw, column=3)
+sq75.grid(row=rw, column=4)
+sq76.grid(row=rw, column=5)
+sq77.grid(row=rw, column=6)
+sq78.grid(row=rw, column=7)
+sq79.grid(row=rw, column=8)
+
+# Row Eight
+
+rw += 1
+
+sq81.grid(row=rw, column=0)
+sq82.grid(row=rw, column=1)
+sq83.grid(row=rw, column=2)
+sq84.grid(row=rw, column=3)
+sq85.grid(row=rw, column=4)
+sq86.grid(row=rw, column=5)
+sq87.grid(row=rw, column=6)
+sq88.grid(row=rw, column=7)
+sq89.grid(row=rw, column=8)
+
+# Row Nine
+
+rw += 1
+
+sq91.grid(row=rw, column=0)
+sq92.grid(row=rw, column=1)
+sq93.grid(row=rw, column=2)
+sq94.grid(row=rw, column=3)
+sq95.grid(row=rw, column=4)
+sq96.grid(row=rw, column=5)
+sq97.grid(row=rw, column=6)
+sq98.grid(row=rw, column=7)
+sq99.grid(row=rw, column=8)
+
+# Solve Button
+
+rw += 1
+
+solveIt.grid(row=rw, column=2, columnspan=5)
+
+root.mainloop()
